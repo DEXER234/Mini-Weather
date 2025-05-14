@@ -160,6 +160,9 @@ footer .footer-info {
 }
 
 @media screen and (max-width: 600px) {
+    .container {
+        margin: auto, 12%;
+    }
     .container .search-bar input {
         width: 70%;
     }
