@@ -140,6 +140,7 @@ body.dark-mode .next-4days .day i {
     padding-bottom: 40px;
     margin: auto 10%;
     border-radius: 30px;
+    position: relative;
 }
 
 .container .search-bar {
