@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const wind = document.querySelector('.temp-details p:nth-child(3)');
     const rain = document.querySelector('.temp-details p:nth-child(4)');
     const forecastDays = document.querySelectorAll('.next-4days .day');
+    const pressure = document.querySelector('.temp-details p:nth-child(5)');
 
     // API Key (replace with your actual API key)
     const API_KEY = '59e29f16bebb66afbf221caf39e73ce3'; // Get from OpenWeatherMap
@@ -74,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         feelsLike.textContent = `Feels like: ${Math.round(data.main.feels_like)}°C`;
         humidity.textContent = `Humidity: ${data.main.humidity}%`;
         wind.textContent = `Wind: ${Math.round(data.wind.speed * 3.6)} km/h`;
+        pressure.textContent = `Pressure: ${data.main.pressure} hPa`;
 
         const rainProbability = data.rain ? `${data.rain['1h'] || 0}%` : '0%';
         rain.textContent = `Rain: ${rainProbability}`;
