@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // DOM Elements
     const searchInput = document.getElementById('city');
     const searchIcon = document.querySelector('.fa-magnifying-glass');
@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentResponse = await fetch(
                 `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
             );
-            
+
             if (!currentResponse.ok) {
                 throw new Error('City not found');
             }
-            
+
             const currentData = await currentResponse.json();
             updateWeatherUI(currentData);
 
@@ -56,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const forecastResponse = await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
             );
-            
+
             const forecastData = await forecastResponse.json();
             updateForecastUI(forecastData);
-            
+
         } catch (error) {
             alert(error.message);
             console.error('Error fetching weather data:', error);
@@ -74,10 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
         feelsLike.textContent = `Feels like: ${Math.round(data.main.feels_like)}°C`;
         humidity.textContent = `Humidity: ${data.main.humidity}%`;
         wind.textContent = `Wind: ${Math.round(data.wind.speed * 3.6)} km/h`;
-        
+
         const rainProbability = data.rain ? `${data.rain['1h'] || 0}%` : '0%';
         rain.textContent = `Rain: ${rainProbability}`;
-        
+
         const iconCode = data.weather[0].icon;
         const iconClass = weatherIcons[iconCode] || 'fa-cloud-sun';
         tempIcon.className = `fa-solid ${iconClass}`;
@@ -88,19 +88,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // We'll get one forecast per day (OpenWeatherMap provides forecasts every 3 hours)
         // So we'll take forecasts at 12:00 PM each day for simplicity
         const dailyForecasts = [];
-        
+
         // Group forecasts by day
         const forecastsByDay = {};
         data.list.forEach(forecast => {
             const date = new Date(forecast.dt * 1000);
             const day = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            
+
             if (!forecastsByDay[day]) {
                 forecastsByDay[day] = [];
             }
             forecastsByDay[day].push(forecast);
         });
-        
+
         // Get one forecast per day (we'll use the midday forecast if available)
         Object.keys(forecastsByDay).forEach(day => {
             const forecasts = forecastsByDay[day];
@@ -108,22 +108,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 const hours = new Date(f.dt * 1000).getHours();
                 return hours >= 11 && hours <= 14;
             }) || forecasts[Math.floor(forecasts.length / 2)];
-            
+
             dailyForecasts.push({
                 date: day,
                 temp: Math.round(middayForecast.main.temp),
                 icon: middayForecast.weather[0].icon
             });
         });
-        
+
         // Update the forecast for the next 4 days (skip today)
         for (let i = 0; i < 4 && i + 1 < dailyForecasts.length; i++) {
             const forecast = dailyForecasts[i + 1]; // Skip today (index 0)
             const dayElement = forecastDays[i];
-            
+
             dayElement.querySelector('h3').textContent = forecast.date;
             dayElement.querySelector('p').textContent = `${forecast.temp}°C`;
-            
+
             const iconClass = weatherIcons[forecast.icon] || 'fa-cloud-sun';
             dayElement.querySelector('i').className = `fa-solid ${iconClass}`;
         }
@@ -148,4 +148,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Default city on load
     fetchWeather('Mumbai');
+});
+
+const toggle = document.getElementById('toggle');
+
+toggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode', toggle.checked);
 });

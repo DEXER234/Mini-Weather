@@ -26,6 +26,115 @@ main {
     height: 100vh;
 }
 
+.container .dark-mode {
+    display: flex;
+    justify-content: right;
+    padding-right: 20px;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    margin: 10px;
+}
+
+.toggle-switch .toggle-input {
+    display: none;
+}
+
+.toggle-switch .toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 24px;
+    background-color: #2196F3;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch .toggle-label::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+.toggle-switch .toggle-input:checked+.toggle-label {
+    background-color: #4CAF50;
+}
+
+.toggle-switch .toggle-input:checked+.toggle-label::before {
+    transform: translateX(16px);
+}
+
+.toggle-switch.light .toggle-label {
+    background-color: #BEBEBE;
+}
+
+.toggle-switch.light .toggle-input:checked+.toggle-label {
+    background-color: #9B9B9B;
+}
+
+.toggle-switch.light .toggle-input:checked+.toggle-label::before {
+    transform: translateX(6px);
+}
+
+.toggle-switch.dark .toggle-label {
+    background-color: #4B4B4B;
+}
+
+.toggle-switch.dark .toggle-input:checked+.toggle-label {
+    background-color: #717171;
+}
+
+.toggle-switch.dark .toggle-input:checked+.toggle-label::before {
+    transform: translateX(16px);
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark-mode .main-info .main-heading h1,
+body.dark-mode .main-info .temp-info .temp h1,
+body.dark-mode .main-info .temp-info .temp i,
+body.dark-mode .temp-details p,
+body.dark-mode .next-4days .day h3,
+body.dark-mode .next-4days .day p {
+    color: #f5f5f5;
+}
+
+body.dark-mode .search-bar i {
+    border: 2px solid white;
+}
+
+body.dark-mode .main-info .main-heading h2 {
+    border: 2px solid white;
+}
+
+body.dark-mode .main-info .temp-info .temp-details p {
+    border: 2px solid white;
+}
+
+body.dark-mode .temp i,
+body.dark-mode .next-4days .day i {
+    color: #ffa500;
+}
+
 .container {
     padding-top: 40px;
     padding-bottom: 40px;
@@ -76,6 +185,12 @@ main {
     font-size: 40px;
     color: var(--primary-color);
     margin-right: 20px;
+    color: transparent;
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
 }
 
 .container .main-info .main-heading h2 {
@@ -97,12 +212,24 @@ main {
 .container .main-info .temp-info .temp h1 {
     font-size: 70px;
     color: var(--primary-color);
+    color: transparent;
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
 }
 
 .container .main-info .temp-info .temp i {
     font-size: 75px;
     color: var(--primary-color);
     margin-bottom: 20px;
+    color: transparent;
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
 }
 
 .container .main-info .temp-info .temp-details {
@@ -128,12 +255,12 @@ main {
 
 #hu {
     background-color: var(--hu-color);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 #wi {
     background-color: var(--wi-color);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 #ra {
@@ -160,11 +287,23 @@ main {
     font-size: 25px;
     color: var(--primary-color);
     margin-top: 7px;
+    color: transparent;
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
 }
 
 .container .next-4days .day h3 {
     font-size: 15px;
     color: var(--primary-color);
+    color: transparent;
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
 }
 
 footer .footer-info {
@@ -185,17 +324,18 @@ footer .footer-info {
         width: 80%;
         text-align: center;
     }
-    
+
 }
 
 @media screen and (max-width: 600px) {
     .container {
         margin: auto 5%;
     }
+
     .container .search-bar input {
         width: 70%;
     }
-    
+
 }
 
 @media screen and (max-width: 500px) {
@@ -204,6 +344,5 @@ footer .footer-info {
         margin-right: 20px;
         gap: 22px;
     }
-    
-}
 
+}
