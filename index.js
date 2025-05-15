@@ -147,5 +147,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Default city on load
-    fetchWeather('Delhi');
+    fetchWeather('Mumbai');
 });
